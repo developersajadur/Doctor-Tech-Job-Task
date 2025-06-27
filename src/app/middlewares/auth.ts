@@ -4,31 +4,59 @@
 import status from 'http-status';
 import AppError from '../errors/AppError';
 import catchAsync from '../helpers/catchAsync';
-import { JwtPayload } from 'jsonwebtoken';
-import { NextFunction, Request, Response } from 'express';
-import { TUserRole } from '../modules/User/user.constant';
-import { tokenDecoder } from '../helpers/jwtHelper';
 import { UserModel } from '../modules/User/user.model';
+import { NextFunction, Request, Response } from 'express';
+import { verifyToken } from '../helpers/jwtHelper';
+import config from '../config';
+import { TUserRole } from '../modules/User/user.constant';
+
+export type TTokenUser = {
+  userId: string;
+  email: string;
+  role: TUserRole;
+  iat: number;
+  exp: number;
+};
 
 const auth = (...requiredRoles: TUserRole[]) => {
-  return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const decoded = tokenDecoder(req);
-    const { role, userId } = decoded;
-    const user: any = UserModel.findById(userId);
-    if (!user) {
-      throw new AppError(status.UNAUTHORIZED, 'User not found!');
-    }
-    if (user.isBlocked) {
-      throw new AppError(status.FORBIDDEN, 'User is blocked!');
-    }
+  return catchAsync(
+    async (
+      req: Request & { user?: TTokenUser },
+      res: Response,
+      next: NextFunction,
+    ) => {
+      const token = req.headers.authorization;
+      if (!token) {
+        throw new AppError(status.UNAUTHORIZED, 'You are not authorized!');
+      }
 
-    if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(status.UNAUTHORIZED, 'You are not authorized!');
-    }
-    (req as any).user = decoded as JwtPayload & { role: string };
-    //  ( req as any).user = user;
-    next();
-  });
+      const verifiedUser = verifyToken(
+        token as string,
+        config.jwt_token_secret as string,
+      ) as TTokenUser;
+      const user: any = UserModel.findById(verifiedUser.userId);
+      if (!user) {
+        throw new AppError(status.UNAUTHORIZED, 'User not found!');
+      }
+      if (user.isBlocked) {
+        throw new AppError(status.FORBIDDEN, 'User is blocked!');
+      }
+      if (user.isDeleted) {
+        throw new AppError(status.FORBIDDEN, 'User is Deleted!');
+      }
+
+      if (verifiedUser.exp && Date.now() >= verifiedUser.exp * 1000) {
+        throw new AppError(status.UNAUTHORIZED, 'Token expired.');
+      }
+
+      if (requiredRoles && !requiredRoles.includes(verifiedUser.role)) {
+        throw new AppError(status.UNAUTHORIZED, 'You are not authorized!');
+      }
+
+      req.user = verifiedUser;
+      next();
+    },
+  );
 };
 
 export default auth;

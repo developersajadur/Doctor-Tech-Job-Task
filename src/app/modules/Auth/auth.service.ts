@@ -17,7 +17,7 @@ const loginUser = async (payload: TLoginUser): Promise<{ token: string }> => {
   const user = await UserModel.findOne({ email: payload?.email }).select(
     '+password',
   );
-  if (!user) {
+  if (!user || user.isDeleted) {
     throw new AppError(status.NOT_FOUND, 'User Not Found');
   } else if (user?.isBlocked) {
     throw new AppError(status.FORBIDDEN, 'User Is Blocked');

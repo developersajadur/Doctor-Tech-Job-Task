@@ -5,6 +5,7 @@ import sendResponse from '../../helpers/sendResponse';
 import { AuthServices } from './auth.service';
 
 const loginUser = catchAsync(async (req, res) => {
+  // console.log(req);
   const result = await AuthServices.loginUser(req?.body);
   const { token } = result;
   res.cookie('token', token, {

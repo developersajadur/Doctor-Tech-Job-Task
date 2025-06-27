@@ -1,9 +1,7 @@
 import status from 'http-status';
-import config from '../../config';
 import AppError from '../../errors/AppError';
 import { IUser } from './user.interface';
 import { UserModel } from './user.model';
-import bcrypt from 'bcrypt';
 
 const createUserByRole = async (
   payload: Partial<IUser>,
@@ -14,14 +12,9 @@ const createUserByRole = async (
     throw new AppError(status.CONFLICT, 'Email already in use');
   }
 
-  const saltRounds = parseInt(config.salt_rounds as string, 10) || 10;
-
-  const hashedPassword = await bcrypt.hash(payload.password!, saltRounds);
-
   const user = await UserModel.create({
     ...payload,
-    password: hashedPassword,
-    role,
+    role
   });
 
   return user;
