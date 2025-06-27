@@ -15,4 +15,17 @@ router.post(
   doctorServiceController.createDoctorService
 );
 
+router.patch(
+  '/services/:id',
+  auth(USER_ROLE.DOCTOR),
+   validateRequest(doctorServiceSchema.updateDoctorServiceValidation),
+  doctorServiceController.updateDoctorService
+);
+
+router.delete(
+  '/services/:id',
+  auth(USER_ROLE.DOCTOR),
+  doctorServiceController.deleteDoctorService
+);
+
 export const DoctorServiceRoutes = router;
