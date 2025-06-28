@@ -85,9 +85,11 @@ BASE_URL: http://localhost:5000/api/v1/
 
 ### 📝 Sample Requests
 #### Register Doctor
-http
-POST /api/v1/auth/register-doctor
 Content-Type: application/json
+Method: POST
+```bash
+/api/v1/auth/register-doctor
+```
 
 ```bash
 {
@@ -102,9 +104,11 @@ Content-Type: application/json
 ```
 
 #### Register Patient
-http
-POST /api/v1/auth/register-patient
 Content-Type: application/json
+Method: POST
+```bash
+/api/v1/auth/register-patient
+```
 
 ```bash
 {
@@ -118,14 +122,17 @@ Content-Type: application/json
 ```
 
 ### Seed Admin
-http
+```bash
 POST /api/v1/auth/admin/seed
+```
 
 #### Create Service
-http
-POST /api/v1/doctor/services
 Content-Type: application/json
 Authorization: token (Doctor Token)
+Method: POST
+```bash
+/api/v1/doctor/services
+```
 
 ```bash
 {
@@ -137,10 +144,12 @@ Authorization: token (Doctor Token)
 ```
 
 ### Set Availability
-http
-POST /api/v1/availability/create-availability
 Content-Type: application/json
 Authorization: token (Doctor Token)
+Method: POST
+```bash
+/api/v1/availability/create-availability
+```
 
 ```bash
 {
@@ -154,9 +163,12 @@ Authorization: token (Doctor Token)
 ```
 
 ### Book A Appointment
-http
-POST /api/v1/appointments
-Authorization: token (Patient token)
+Content-Type: application/json
+Authorization: token (Patient Token)
+Method: POST
+```bash
+/api/v1/appointments
+```
 
 ```bash
 {
