@@ -5,7 +5,7 @@ Doctor Tech is a full-stack web application for managing doctor appointments, bu
 ## 🔗 Links
 - 🌐 Live Site: Sorry, I can't provide for security issues
 - 📂 GitHub Repository: [https://github.com/yourusername/doctor-tech]
-- 📬 Postman Collection: [Add your Postman collection link here]
+- 📬 Postman Collection: [https://github.com/developersajadur/Doctor-Tech-Job-Task/blob/main/doctor_tech_postman_collection]
 
 ## 📦 Features
 - 👨‍⚕️ Doctor registration, services, and time-slot availability
