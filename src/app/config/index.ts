@@ -10,4 +10,9 @@ export default {
   salt_rounds: process.env.SALT_ROUNDS,
   jwt_token_secret: process.env.JWT_TOKEN_SECRET,
   jwt_token_expires_in: process.env.JWT_TOKEN_EXPIRES_IN,
+  default_admin_email: process.env.DEFAULT_ADMIN_EMAIL,
+  default_admin_phone: process.env.DEFAULT_ADMIN_PHONE,
+  default_admin_password: process.env.DEFAULT_ADMIN_PASSWORD,
+  email: process.env.EMAIL,
+  app_password: process.env.APP_PASSWORD,
 };

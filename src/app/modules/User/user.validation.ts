@@ -23,7 +23,6 @@ const registerPatientValidation = z.object({
   }),
 });
 
-
 export const userValidationSchema = {
   registerDoctorValidation,
   registerPatientValidation,

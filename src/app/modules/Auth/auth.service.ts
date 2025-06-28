@@ -14,6 +14,7 @@ export type TJwtPayload = {
 };
 
 const loginUser = async (payload: TLoginUser): Promise<{ token: string }> => {
+  // console.log(payload);
   const user = await UserModel.findOne({ email: payload?.email }).select(
     '+password',
   );
@@ -22,7 +23,8 @@ const loginUser = async (payload: TLoginUser): Promise<{ token: string }> => {
   } else if (user?.isBlocked) {
     throw new AppError(status.FORBIDDEN, 'User Is Blocked');
   }
-  const passwordMatch = await bcrypt.compare(payload?.password, user?.password);
+  const passwordMatch = await bcrypt.compare(payload.password, user.password);
+  // console.log({passwordMatch});
   if (!passwordMatch) {
     throw new AppError(status.UNAUTHORIZED, 'Invalid password!');
   }

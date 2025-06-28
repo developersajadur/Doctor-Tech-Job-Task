@@ -4,10 +4,9 @@ import { IDoctorService } from './doctorService.interface';
 import { DoctorServiceModel } from './doctorService.model';
 import mongoose from 'mongoose';
 
-
 const createDoctorService = async (
   payload: Partial<IDoctorService>,
-  doctorId: string
+  doctorId: string,
 ): Promise<IDoctorService> => {
   const service = await DoctorServiceModel.create({
     ...payload,
@@ -17,11 +16,10 @@ const createDoctorService = async (
   return service;
 };
 
-
 const updateDoctorService = async (
   serviceId: string,
   doctorId: string,
-  payload: Partial<IDoctorService>
+  payload: Partial<IDoctorService>,
 ): Promise<IDoctorService> => {
   const isServiceExist = await DoctorServiceModel.findById(serviceId);
 
@@ -36,7 +34,7 @@ const updateDoctorService = async (
   const updatedService = await DoctorServiceModel.findOneAndUpdate(
     { _id: serviceId, doctorId: new mongoose.Types.ObjectId(doctorId) },
     payload,
-    { new: true }
+    { new: true },
   );
 
   if (!updatedService) {
@@ -46,10 +44,9 @@ const updateDoctorService = async (
   return updatedService;
 };
 
-
 const deleteDoctorService = async (
   serviceId: string,
-  doctorId: string
+  doctorId: string,
 ): Promise<IDoctorService> => {
   const isServiceExist = await DoctorServiceModel.findById(serviceId);
 

@@ -15,7 +15,7 @@ const createAvailability = catchAsync(
 
     const availability = await availabilityService.createAvailability(
       req.body,
-      doctorId
+      doctorId,
     );
 
     sendResponse(res, {
@@ -24,7 +24,7 @@ const createAvailability = catchAsync(
       message: 'Availability set successfully',
       data: availability,
     });
-  }
+  },
 );
 
 export const availabilityController = {

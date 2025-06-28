@@ -9,9 +9,9 @@ export interface IUser {
   password: string;
   role: TUserRole;
   specialization?: string;
-  hospitalName?: string;  
-  hospitalFloor?: string; 
-  age?: number;        
+  hospitalName?: string;
+  hospitalFloor?: string;
+  age?: number;
   gender?: 'male' | 'female' | 'other';
   isBlocked: boolean;
   isDeleted: boolean;

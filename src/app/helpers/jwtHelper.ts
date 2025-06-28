@@ -8,7 +8,6 @@ import AppError from '../errors/AppError';
 import config from '../config';
 import { TJwtPayload } from '../modules/Auth/auth.service';
 
-
 export const createToken = (
   jwtPayload: TJwtPayload,
   secret: string,
@@ -18,7 +17,6 @@ export const createToken = (
     expiresIn: expiresIn,
   });
 };
-
 
 export const verifyToken = (token: string, secret: string) => {
   return jwt.verify(token, secret) as JwtPayload;

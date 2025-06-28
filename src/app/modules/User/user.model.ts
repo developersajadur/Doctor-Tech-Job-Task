@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IUser } from './user.interface';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 import config from '../../config';
 
 const userSchema = new Schema<IUser>(
@@ -8,8 +8,12 @@ const userSchema = new Schema<IUser>(
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true },
     phone: { type: String, required: true, trim: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ['admin', 'doctor', 'patient'], required: true },
+    password: { type: String, required: true, select: 0 },
+    role: {
+      type: String,
+      enum: ['admin', 'doctor', 'patient'],
+      required: true,
+    },
 
     specialization: { type: String },
     hospitalName: { type: String },
@@ -23,17 +27,17 @@ const userSchema = new Schema<IUser>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Password hashing
 userSchema.pre('save', async function (next) {
   const user = this as IUser;
-    const hashedPassword = await bcrypt.hash(
-      user.password as string,
-      Number(config.salt_rounds),
-    );
-    user.password = hashedPassword;
+  const hashedPassword = await bcrypt.hash(
+    user.password as string,
+    Number(config.salt_rounds),
+  );
+  user.password = hashedPassword;
 
   next();
 });

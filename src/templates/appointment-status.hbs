@@ -1,0 +1,52 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Appointment Status Update</title>
+    <style>
+      body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8; margin: 0; padding: 20px; color: #2d3748; }
+      .container { max-width: 620px; margin: 0 auto; background-color: #ffffff;
+      border-radius: 10px; padding: 40px 30px; box-shadow: 0 8px 24px rgba(0, 0,
+      0, 0.05); } .header { text-align: center; margin-bottom: 24px; } .header
+      h1 { color: #3b82f6; font-size: 26px; margin-bottom: 5px; } .message {
+      font-size: 16px; line-height: 1.7; color: #374151; } .highlight { color:
+      #1e3a8a; font-weight: 600; } .status { display: inline-block; padding: 6px
+      14px; margin-top: 12px; border-radius: 20px; background-color: #eef2ff;
+      color: #4338ca; font-weight: bold; text-transform: capitalize; } .footer {
+      margin-top: 40px; text-align: center; font-size: 14px; color: #9ca3af; }
+      @media (max-width: 640px) { .container { padding: 25px 20px; } }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='header'>
+        <h1>Appointment Status Update</h1>
+      </div>
+
+      <div class='message'>
+        <p>Dear <span class='highlight'>{{patientName}}</span>,</p>
+
+        <p>
+          Your appointment with
+          <strong>Dr. {{doctorName}}</strong>
+          regarding
+          <strong>{{serviceTitle}}</strong>
+          scheduled on
+          <strong>{{date}}</strong>
+          at
+          <strong>{{time}}</strong>
+          has been updated to:
+        </p>
+
+        <p class='status'>{{status}}</p>
+
+        <p>Thank you for choosing
+          <strong>Doctor Tech</strong>. We look forward to serving you.</p>
+      </div>
+
+      <div class='footer'>
+        <p>Regards,<br />The Doctor Tech Team</p>
+      </div>
+    </div>
+  </body>
+</html>

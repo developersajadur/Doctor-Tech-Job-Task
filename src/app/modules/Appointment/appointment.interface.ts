@@ -1,7 +1,5 @@
-
 import { Types } from 'mongoose';
 import { TAppointmentStatus } from './appointment.constant';
-
 
 export interface IAppointment {
   _id?: Types.ObjectId;

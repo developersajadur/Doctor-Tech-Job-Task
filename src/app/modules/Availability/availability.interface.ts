@@ -1,6 +1,4 @@
-
 import { Types } from 'mongoose';
-
 
 export const WeekDays = [
   'Monday',
@@ -18,10 +16,11 @@ export interface IAvailability {
   _id: Types.ObjectId;
   doctorId: Types.ObjectId;
   serviceId: Types.ObjectId;
-  day: TWeekDay; 
+  day: TWeekDay;
   timeSlots: {
-    startTime: string; 
-    endTime: string;  
+    _id: Types.ObjectId;
+    startTime: string;
+    endTime: string;
   }[];
   createdAt: Date;
   updatedAt: Date;

@@ -1,4 +1,3 @@
-
 import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
 import auth from '../../middlewares/auth';
@@ -12,20 +11,20 @@ router.post(
   '/services',
   auth(USER_ROLE.DOCTOR),
   validateRequest(doctorServiceSchema.createDoctorServiceValidation),
-  doctorServiceController.createDoctorService
+  doctorServiceController.createDoctorService,
 );
 
 router.patch(
   '/services/:id',
   auth(USER_ROLE.DOCTOR),
-   validateRequest(doctorServiceSchema.updateDoctorServiceValidation),
-  doctorServiceController.updateDoctorService
+  validateRequest(doctorServiceSchema.updateDoctorServiceValidation),
+  doctorServiceController.updateDoctorService,
 );
 
 router.delete(
   '/services/:id',
   auth(USER_ROLE.DOCTOR),
-  doctorServiceController.deleteDoctorService
+  doctorServiceController.deleteDoctorService,
 );
 
 export const DoctorServiceRoutes = router;

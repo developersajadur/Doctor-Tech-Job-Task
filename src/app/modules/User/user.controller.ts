@@ -1,4 +1,3 @@
-
 import catchAsync from '../../helpers/catchAsync';
 import sendResponse from '../../helpers/sendResponse';
 import status from 'http-status';
@@ -37,7 +36,19 @@ const createPatient = catchAsync(async (req, res) => {
   });
 });
 
+const seedAdmin = catchAsync(async (req, res) => {
+  const admin = await userService.seedAdmin();
+
+  sendResponse(res, {
+    statusCode: status.CREATED,
+    success: true,
+    message: 'Admin seeded successfully',
+    data: admin,
+  });
+});
+
 export const userController = {
   createPatient,
-  createDoctor
+  createDoctor,
+  seedAdmin,
 };

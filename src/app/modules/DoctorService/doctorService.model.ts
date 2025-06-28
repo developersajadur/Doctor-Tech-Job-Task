@@ -1,4 +1,3 @@
-
 import { Schema, model } from 'mongoose';
 import { IDoctorService } from './doctorService.interface';
 
@@ -10,7 +9,10 @@ const serviceSchema = new Schema<IDoctorService>(
     duration: { type: Number, required: true },
     doctorId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const DoctorServiceModel = model<IDoctorService>('Doctor-Service', serviceSchema);
+export const DoctorServiceModel = model<IDoctorService>(
+  'Doctor-Service',
+  serviceSchema,
+);

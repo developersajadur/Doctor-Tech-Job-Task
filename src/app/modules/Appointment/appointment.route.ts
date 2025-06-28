@@ -7,33 +7,29 @@ import { appointmentValidation } from './appointment.validation';
 
 const router = express.Router();
 
-
 router.get(
   '/doctor/appointments',
   auth(USER_ROLE.DOCTOR),
-  appointmentController.getDoctorAppointments
+  appointmentController.getDoctorAppointments,
 );
-
 
 router.patch(
   '/doctor/appointments/:id/:status',
   auth(USER_ROLE.DOCTOR),
-  appointmentController.updateAppointmentStatus
+  appointmentController.updateAppointmentStatus,
 );
 
 router.post(
   '/appointments',
   auth(USER_ROLE.PATIENT),
   validateRequest(appointmentValidation.createAppointmentValidation),
-  appointmentController.bookAppointment
+  appointmentController.bookAppointment,
 );
-
 
 router.get(
   '/patient/appointments',
   auth(USER_ROLE.PATIENT),
-  appointmentController.getPatientAppointments
+  appointmentController.getPatientAppointments,
 );
-
 
 export const appointmentRoutes = router;

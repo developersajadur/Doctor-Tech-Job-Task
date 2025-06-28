@@ -1,4 +1,3 @@
-
 import express from 'express';
 import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
@@ -12,7 +11,7 @@ router.post(
   '/create-availability',
   auth(USER_ROLE.DOCTOR),
   validateRequest(createAvailabilitySchema),
-  availabilityController.createAvailability
+  availabilityController.createAvailability,
 );
 
 export const availabilityRoutes = router;

@@ -31,6 +31,7 @@ const getPatientAppointments = catchAsync(
     const patientId = req.user?.userId;
     const appointments = await appointmentService.getPatientAppointments(
       patientId!,
+      req.query,
     );
     sendResponse(res, {
       statusCode: status.OK,
@@ -46,7 +47,7 @@ const getDoctorAppointments = catchAsync(
     const doctorId = req.user?.userId;
     const appointments = await appointmentService.getDoctorAppointments(
       doctorId!,
-      req.query.status as string,
+      req.query,
     );
     sendResponse(res, {
       statusCode: status.OK,

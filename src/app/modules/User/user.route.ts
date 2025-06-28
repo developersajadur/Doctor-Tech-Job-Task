@@ -1,4 +1,3 @@
-
 import express from 'express';
 import { userController } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
@@ -9,13 +8,15 @@ const router = express.Router();
 router.post(
   '/register-doctor',
   validateRequest(userValidationSchema.registerDoctorValidation),
-  userController.createDoctor
+  userController.createDoctor,
 );
 
 router.post(
   '/register-patient',
   validateRequest(userValidationSchema.registerPatientValidation),
-  userController.createPatient
+  userController.createPatient,
 );
+
+router.post('/admin/seed', userController.seedAdmin);
 
 export const userRoutes = router;

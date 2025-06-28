@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FilterQuery, Query } from 'mongoose';
 
 class QueryBuilder<T> {
@@ -11,83 +10,73 @@ class QueryBuilder<T> {
   }
 
   search(searchableFields: string[]) {
-    const search = this?.query?.search;
-    if (search) {
+    const searchTerm = this.query.search as string;
+    if (searchTerm) {
+      const searchConditions = searchableFields.map((field) => ({
+        [field]: { $regex: searchTerm, $options: 'i' },
+      }));
       this.modelQuery = this.modelQuery.find({
-        $or: searchableFields.map(
-          (field) =>
-            ({
-              [field]: { $regex: search, $options: 'i' },
-            }) as FilterQuery<T>,
-        ),
-      });
+        $or: searchConditions,
+      } as FilterQuery<T>);
     }
-
     return this;
   }
 
   filter() {
-    const queryObj = { ...this.query }; // copy
-
-    // Filtering
+    const queryCopy = { ...this.query };
     const excludeFields = ['search', 'sort', 'limit', 'page', 'fields'];
-    excludeFields.forEach((el) => delete queryObj[el]);
+    excludeFields.forEach((field) => delete queryCopy[field]);
 
-    // Handle minPrice and maxPrice filtering
-    if (queryObj.minPrice || queryObj.maxPrice) {
-      const priceQuery: Record<string, any> = {};
+    // Price filtering
+    if ('minPrice' in queryCopy || 'maxPrice' in queryCopy) {
+      const priceQuery: Record<string, number> = {};
 
-      if (queryObj.minPrice) {
-        priceQuery['$gte'] = queryObj.minPrice; // minPrice filter
-        delete queryObj.minPrice;
+      if (queryCopy.minPrice) {
+        priceQuery.$gte = Number(queryCopy.minPrice);
+        delete queryCopy.minPrice;
       }
 
-      if (queryObj.maxPrice) {
-        priceQuery['$lte'] = queryObj.maxPrice; // maxPrice filter
-        delete queryObj.maxPrice;
+      if (queryCopy.maxPrice) {
+        priceQuery.$lte = Number(queryCopy.maxPrice);
+        delete queryCopy.maxPrice;
       }
 
-      // If price filter exists, add to the query
-      if (Object.keys(priceQuery).length > 0) {
-        queryObj['price'] = priceQuery;
-      }
+      queryCopy['price'] = priceQuery;
     }
 
-    this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
-
+    this.modelQuery = this.modelQuery.find(queryCopy as FilterQuery<T>);
     return this;
   }
 
   sort() {
-    const sort =
-      (this?.query?.sort as string)?.split(',')?.join(' ') || '-createdAt';
-    this.modelQuery = this.modelQuery.sort(sort as string);
-
+    const sortBy =
+      (this.query.sort as string)?.split(',').join(' ') || '-createdAt';
+    this.modelQuery = this.modelQuery.sort(sortBy);
     return this;
   }
 
   paginate() {
-    const page = Number(this?.query?.page) || 1;
-    const limit = Number(this?.query?.limit) || 10;
+    const page = Number(this.query.page) || 1;
+    const limit = Number(this.query.limit) || 10;
     const skip = (page - 1) * limit;
 
     this.modelQuery = this.modelQuery.skip(skip).limit(limit);
-
     return this;
   }
 
   fields() {
     const fields =
-      (this?.query?.fields as string)?.split(',')?.join(' ') || '-__v';
-
+      (this.query.fields as string)?.split(',').join(' ') || '-__v';
     this.modelQuery = this.modelQuery.select(fields);
     return this;
   }
+
   async countTotal() {
-    const totalQueries = this.modelQuery.getFilter();
-    const total = await this.modelQuery.model.countDocuments(totalQueries);
-    const page = Number(this?.query?.page) || 1;
-    const limit = Number(this?.query?.limit) || 10;
+    const filter = this.modelQuery.getFilter(); // Extract applied filter
+    const total = await this.modelQuery.model.countDocuments(filter);
+
+    const page = Number(this.query.page) || 1;
+    const limit = Number(this.query.limit) || 10;
     const totalPage = Math.ceil(total / limit);
 
     return {
