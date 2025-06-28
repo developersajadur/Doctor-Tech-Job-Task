@@ -28,14 +28,17 @@ Doctor Tech is a full-stack web application for managing doctor appointments, bu
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/doctor-tech.git
-cd doctor-tech
-2. Install Dependencies
-bash
-npm install
-3. Configure Environment
-Create .env file:
+https://github.com/developersajadur/Doctor-Tech-Job-Task
+cd Doctor-Tech-Job-Task
+```
 
+### 2. Install Dependencies
+```bash
+npm install
+```
+### 3. Configure Environment
+#### Create .env file:
+```bash
 env
 PORT=5000
 DATABASE_URL=mongodb+srv://your-db-url
@@ -48,90 +51,109 @@ DEFAULT_ADMIN_EMAIL=admin@doctor-tech.com
 DEFAULT_ADMIN_PHONE=01234567890
 DEFAULT_ADMIN_PASSWORD=admin123
 SEED_SECRET=seed-admin-secret
-4. Start Development Server
-bash
+
+```
+
+### 4. Start Development Server
+```bash
 npm run dev
-🌱 Admin Setup
+```
+
+### 🌱 Admin Setup
 Seed default admin:
 
-bash
+```bash
 POST /api/v1/seed-admin?secret=your_seed_secret
-Creates admin with:
+```
 
-json
-{
-  "email": "admin@doctor-tech.com",
-  "password": "admin123"
-}
-🧪 API Testing
+### 🧪 API Testing
 Import the Postman collection and set environment variables:
 
-BASE_URL: http://localhost:5000
+```bash
+BASE_URL: http://localhost:5000/api/v1/
+```
 
-TOKEN: Your JWT token
-
-📝 Sample Requests
-Register Doctor
+### 📝 Sample Requests
+#### Register Doctor
 http
-POST /api/v1/auth/register
+POST /api/v1/auth/register-doctor
 Content-Type: application/json
 
+```bash
 {
-  "name": "Dr. Smith",
-  "email": "smith@example.com",
-  "password": "doctor123",
-  "phone": "01712345678",
-  "role": "doctor"
+  "name": "Doctor pro",
+  "email": "doctorpro@gmail.com",
+  "phone": "01712345675",
+  "password": "DoctorPro@123",
+  "specialization": "Cardiology",
+  "hospitalName": "City Hospital",
+  "hospitalFloor": "3rd Floor"
 }
-Create Service
-http
-POST /api/v1/services
-Content-Type: application/json
-Authorization: Bearer <doctor_token>
+```
 
+#### Register Patient
+http
+POST /api/v1/auth/register-patient
+Content-Type: application/json
+
+```bash
 {
-  "title": "General Checkup",
-  "description": "Routine health examination",
-  "price": 800,
-  "duration": 30,
-  "doctorId": "doctorObjectId"
+  "name": "Patient pro",
+  "email": "patientpro@gmail.com",
+  "phone": "01898765462",
+  "password": "PatientPro@123",
+  "age": 18,
+  "gender": "male"
 }
-Set Availability
-http
-POST /api/v1/availability
-Content-Type: application/json
-Authorization: Bearer <doctor_token>
+```
 
+### Seed Admin
+http
+POST /api/v1/auth/admin/seed
+
+#### Create Service
+http
+POST /api/v1/doctor/services
+Content-Type: application/json
+Authorization: token (Doctor Token)
+
+```bash
 {
-  "serviceId": "serviceObjectId",
-  "day": "Monday",
+  "title": "Diabetes Consultation",
+  "description": "Consultation for diabetes treatment and management.",
+  "price": 1500,
+  "duration": 30
+}
+```
+
+### Set Availability
+http
+POST /api/v1/availability/create-availability
+Content-Type: application/json
+Authorization: token (Doctor Token)
+
+```bash
+{
+  "serviceId": "685f1a9d3a56063a2f956f3a",
+  "day": "Wednesday",
   "timeSlots": [
-    {"startTime": "09:00", "endTime": "11:00"},
-    {"startTime": "14:00", "endTime": "16:00"}
+    { "startTime": "10:00", "endTime": "12:00" },
+    { "startTime": "16:00", "endTime": "18:00" }
   ]
 }
-📊 Admin Dashboard
+```
+
+### Book A Appointment
 http
-GET /api/v1/admin/dashboard
-Authorization: Bearer <admin_token>
-Response:
+POST /api/v1/appointments
+Authorization: token (Patient token)
 
-json
+```bash
 {
-  "totalDoctors": 15,
-  "totalPatients": 42,
-  "totalAppointments": 87
+  "doctorId": "685f0c018c5f018b440b1615",
+  "serviceId": "685f1a9d3a56063a2f956f3a",
+  "selectedDate": "2025-07-06",
+  "timeSlotId": "685fffddfc319a0f427f54ae"
 }
-📧 Email Notifications
-Configure in .env:
+```
 
-env
-EMAIL=your_email@gmail.com
-APP_PASSWORD=your_app_password
-Templates include:
-
-Appointment confirmation
-
-Status updates
-
-Reminders
