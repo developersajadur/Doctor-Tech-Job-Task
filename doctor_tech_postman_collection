@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "b2ad80e3-445d-43d8-8083-9134c94fd5f4",
+		"name": "Doctor Tech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39124117"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login A User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Alice Rahman\",\r\n  \"email\": \"alice.rahman@example.com\",\r\n  \"phone\": \"01898765432\",\r\n  \"password\": \"Patient@123\",\r\n  \"age\": 28,\r\n  \"gender\": \"female\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/register-patient",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register-patient"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register A Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Dr. John Smith\",\r\n  \"email\": \"dr.john@example.com\",\r\n  \"phone\": \"01712345678\",\r\n  \"password\": \"Doctor@123\",\r\n  \"specialization\": \"Cardiology\",\r\n  \"hospitalName\": \"City Hospital\",\r\n  \"hospitalFloor\": \"3rd Floor\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/register-doctor",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register-doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register A Patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Alice Rahman\",\r\n  \"email\": \"alice.rahman@example.com\",\r\n  \"phone\": \"01898765432\",\r\n  \"password\": \"Patient@123\",\r\n  \"age\": 28,\r\n  \"gender\": \"female\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/register-patient",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seed Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/auth/admin/seed",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"seed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctor Service",
+			"item": [
+				{
+					"name": "Create A Doctor Service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DOCTOR_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Diabetes Consultation\",\r\n  \"description\": \"Consultation for diabetes treatment and management.\",\r\n  \"price\": 1500,\r\n  \"duration\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/doctor/services",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"doctor",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Doctor Service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DOCTOR_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Diabetes Consultation\",\r\n  \"description\": \"Consultation for diabetes treatment and management.\",\r\n  \"price\": 1500,\r\n  \"duration\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/doctor/services",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"doctor",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Doctor Service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DOCTOR_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Diabetes Consultation\",\r\n  \"description\": \"Consultation for diabetes treatment and management.\",\r\n  \"price\": 1500,\r\n  \"duration\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/doctor/services",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"doctor",
+								"services"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Availability",
+			"item": [
+				{
+					"name": "Create Availability",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DOCTOR_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceId\": \"685f1a9d3a56063a2f956f3a\",\r\n  \"day\": \"Friday\",\r\n  \"timeSlots\": [\r\n    { \"startTime\": \"10:00\", \"endTime\": \"12:00\" },\r\n    { \"startTime\": \"16:00\", \"endTime\": \"18:00\" }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/availability/create-availability",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"availability",
+								"create-availability"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointment",
+			"item": [
+				{
+					"name": "Get All Doctor Appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DOCTOR_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/doctor/appointments?status=pending",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"doctor",
+								"appointments"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Patient Appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{PATIENT_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/patient/appointments?status=pending",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patient",
+								"appointments"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book A Appointments",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{PATIENT_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doctorId\": \"685f0c018c5f018b440b1615\",\r\n  \"serviceId\": \"685f1a9d3a56063a2f956f3a\",\r\n  \"selectedDate\": \"2025-07-06\",\r\n  \"timeSlotId\": \"685fffddfc319a0f427f54ad\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/appointments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Appointment Status",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Get All Doctor With Query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DOCTOR_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceId\": \"685f1a9d3a56063a2f956f3a\",\r\n  \"day\": \"Monday\",\r\n  \"timeSlots\": [\r\n    { \"startTime\": \"10:00\", \"endTime\": \"12:00\" },\r\n    { \"startTime\": \"16:00\", \"endTime\": \"18:00\" }\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/doctors?hospitalName=City Hospital&specialization=Cardiology&serviceName=Diabetes Consultation",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"doctors"
+							],
+							"query": [
+								{
+									"key": "hospitalName",
+									"value": "City Hospital"
+								},
+								{
+									"key": "specialization",
+									"value": "Cardiology"
+								},
+								{
+									"key": "serviceName",
+									"value": "Diabetes Consultation"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Doctor Profile With All Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DOCTOR_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceId\": \"685f1a9d3a56063a2f956f3a\",\r\n  \"day\": \"Monday\",\r\n  \"timeSlots\": [\r\n    { \"startTime\": \"10:00\", \"endTime\": \"12:00\" },\r\n    { \"startTime\": \"16:00\", \"endTime\": \"18:00\" }\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/doctors/685f0c018c5f018b440b1615",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"doctors",
+								"685f0c018c5f018b440b1615"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Dashboard Details",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:5000/api/v1/",
+			"type": "string"
+		},
+		{
+			"key": "DOCTOR_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODVmMGMwMThjNWYwMThiNDQwYjE2MTUiLCJlbWFpbCI6ImRvY3RvckBnbWFpbC5jb20iLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzUxMDU5NTIyLCJleHAiOjE3NTM2NTE1MjJ9._xoRMwfDEhLeP0avGVQyHgvIFJasjbn9HHLRJR00Bf8",
+			"type": "string"
+		},
+		{
+			"key": "PATIENT_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODVmMGMyYThjNWYwMThiNDQwYjE2MTgiLCJlbWFpbCI6InBhdGllbnRAZ21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJpYXQiOjE3NTEwNjU3NDUsImV4cCI6MTc1MzY1Nzc0NX0.CknGHAsgf38sN64_fDx7mNiWdZWlsAT5IMAIHdRteqA",
+			"type": "string"
+		},
+		{
+			"key": "ADMIN_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODYwMThhMGFhMTI0ODdkZDg3NWQyNmEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MTEyODIyOSwiZXhwIjoxNzUzNzIwMjI5fQ.lqY8nUA9aomv6bzNHOV7cJTA1hQozzfmWewUPWmzxmo",
+			"type": "string"
+		}
+	]
+}
