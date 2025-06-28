@@ -39,18 +39,28 @@ npm install
 ### 3. Configure Environment
 #### Create .env file:
 ```bash
-env
+# Environment
+NODE_ENV=development
 PORT=5000
-DATABASE_URL=mongodb+srv://your-db-url
-SALT_ROUNDS=10
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN=7d
+
+# MongoDB Connection
+DATABASE_URL=your_mongodb_connection_string
+
+# Bcrypt Salt
+SALT_ROUNDS=12
+
+# JWT Config
+JWT_TOKEN_SECRET=your_jwt_secret_key
+JWT_TOKEN_EXPIRES_IN=30d
+
+# Default Admin Credentials
+DEFAULT_ADMIN_EMAIL=admin@gmail.com
+DEFAULT_ADMIN_PASSWORD=Admin@123
+DEFAULT_ADMIN_PHONE=01000000000
+
+# Email SMTP Credentials (Gmail)
 EMAIL=your_email@gmail.com
-APP_PASSWORD=your_app_password
-DEFAULT_ADMIN_EMAIL=admin@doctor-tech.com
-DEFAULT_ADMIN_PHONE=01234567890
-DEFAULT_ADMIN_PASSWORD=admin123
-SEED_SECRET=seed-admin-secret
+APP_PASSWORD=your_app_specific_password
 
 ```
 
