@@ -3,7 +3,7 @@
 Doctor Tech is a full-stack web application for managing doctor appointments, built with Node.js, Express, MongoDB, and TypeScript. It allows patients to book appointments, doctors to manage their schedules, and admins to oversee the entire platform.
 
 ## 🔗 Links
-- 🌐 Live Site: [Add your live URL here]
+- 🌐 Live Site: Sorry, I can't provide for security issues
 - 📂 GitHub Repository: [https://github.com/yourusername/doctor-tech]
 - 📬 Postman Collection: [Add your Postman collection link here]
 
