@@ -69,26 +69,27 @@ APP_PASSWORD=your_app_specific_password
 npm run dev
 ```
 
-### 🌱 Admin Setup
-Seed default admin:
-
-```bash
-POST /api/v1/seed-admin?secret=your_seed_secret
-```
-
 ### 🧪 API Testing
 Import the Postman collection and set environment variables:
-
+#### BASE_URL:
 ```bash
-BASE_URL: http://localhost:5000/api/v1/
+http://localhost:5000/api/v1/
 ```
 
 ### 📝 Sample Requests
+
+### 🌱 Admin Setup
+Seed default admin:
+Method: POST
+```bash
+/seed-admin?secret=your_seed_secret
+```
+
 #### Register Doctor
 Content-Type: application/json
 Method: POST
 ```bash
-/api/v1/auth/register-doctor
+/auth/register-doctor
 ```
 
 ```bash
@@ -107,7 +108,7 @@ Method: POST
 Content-Type: application/json
 Method: POST
 ```bash
-/api/v1/auth/register-patient
+/auth/register-patient
 ```
 
 ```bash
@@ -121,17 +122,12 @@ Method: POST
 }
 ```
 
-### Seed Admin
-```bash
-POST /api/v1/auth/admin/seed
-```
-
 #### Create Service
 Content-Type: application/json
 Authorization: token (Doctor Token)
 Method: POST
 ```bash
-/api/v1/doctor/services
+/doctor/services
 ```
 
 ```bash
@@ -148,7 +144,7 @@ Content-Type: application/json
 Authorization: token (Doctor Token)
 Method: POST
 ```bash
-/api/v1/availability/create-availability
+/availability/create-availability
 ```
 
 ```bash
@@ -167,7 +163,7 @@ Content-Type: application/json
 Authorization: token (Patient Token)
 Method: POST
 ```bash
-/api/v1/appointments
+/appointments
 ```
 
 ```bash
